@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beauty Product Allergen Checker Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        img {
+            margin-bottom: 20px;
+            max-width: 300px;
+            max-height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            text-align: left;
+            display: inline-block;
+        }
+        
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>{{ product.product_name }}</h1>
+    {% if product.image_url %}
+    <img src="{{ product.image_url }}" alt="{{ product.product_name }}"> {% endif %}
+    <p>Ingredients: {{ product.ingredients_text }}</p>
+
+    {% if found_allergens %}
+    <h2>Allergens Found:</h2>
+    <ul>
+        {% for allergen in found_allergens %}
+        <li>{{ allergen }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No allergens found. The beauty product is safe based on the provided allergen list.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('index') }}">Check another product</a></p>
+</body>
+
+</html>
